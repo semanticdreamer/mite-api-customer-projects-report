@@ -1,0 +1,25 @@
+{
+    "hash": "6555fc92083c4491d29b3216270bf751",
+    "packages": [
+        {
+            "package": "phly/mustache",
+            "version": "1.0.0"
+        },
+        {
+            "package": "slim/extras",
+            "version": "1.0.2"
+        },
+        {
+            "package": "slim/slim",
+            "version": "1.6.4"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": [
+
+    ]
+}

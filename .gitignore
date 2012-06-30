@@ -1,0 +1,4 @@
+.DS_Store
+*.phar
+app/vendor
+phpinfo.php

@@ -1,0 +1,9 @@
+[submodule "dependencies/Slim"]
+	path = dependencies/Slim
+	url = git://github.com/codeguy/Slim.git
+[submodule "dependencies/Slim-Extras"]
+	path = dependencies/Slim-Extras
+	url = git://github.com/codeguy/Slim-Extras.git
+[submodule "dependencies/Mustache"]
+	path = dependencies/Mustache
+	url = git://github.com/bobthecow/mustache.php.git

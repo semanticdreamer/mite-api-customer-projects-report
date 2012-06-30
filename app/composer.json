@@ -1,0 +1,7 @@
+{
+    "require": {
+        "slim/slim": "1.6.4",
+        "slim/extras": "1.0.2",
+        "phly/mustache": "1.0.0"
+    }
+}
