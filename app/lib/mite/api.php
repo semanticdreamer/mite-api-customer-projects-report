@@ -91,7 +91,7 @@ class Mite_Api
 				return $result[$resource][$key] == $value;
 			}
 		);
-		return $results;
+		return $results[1][$resource];
 	}
 }
 ?>
