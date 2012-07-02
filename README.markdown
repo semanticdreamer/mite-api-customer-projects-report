@@ -38,6 +38,10 @@ Contains project dependencies, managed by [Composer][composer].
 
 Contains third-party libraries. Directory managed by [Composer][composer].
 
+`app/ext`
+
+Contains third-party classes and libraries shipped with the app (i.e. **NOT** managed by [Composer][composer]).
+
 `app/lib/`
 
 Contains custom libraries used by the application.
@@ -58,6 +62,7 @@ Project's PHP dependencies, managed by [Composer][composer].
 - [Slim Framework Extras][slimextras] - Custom Views (e.g. `MustacheView`).
 - [Mustache.php][mustachephp] - A Mustache implementation in PHP.
 - [Symfony YAML Component][symfonyyaml] - A Component that loads and dumps YAML files.
+- [Bootstrap, from Twitter][twitterbootstrap] - Simple and flexible HTML, CSS, and Javascript for popular user interface components and interactions."
 
 ## Dev Notes (to-be-deleted)
 
@@ -89,3 +94,4 @@ Update Dependencies via [Composer][composer]:
 [mamp]: http://www.mamp.info/ "MAMP - stands for: Macintosh, Apache, Mysql and PHP."
 [git]: http://git-scm.com/ "Git is a free and open source distributed version control system."
 [symfonyyaml]:https://github.com/symfony/Yaml "Symfony YAML Component"
+[twitterbootstrap]:http://twitter.github.com/bootstrap/ "Bootstrap, from Twitter"
