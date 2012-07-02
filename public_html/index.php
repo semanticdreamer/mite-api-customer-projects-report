@@ -25,26 +25,21 @@ require APPDIR.'vendor/slim/slim/Slim/Slim.php';
 require APPDIR.'vendor/slim/extras/Views/MustacheView.php';
 MustacheView::$mustacheDirectory = APPDIR.'vendor/phly/library/Phly/Mustache/';
 
-//With default settings
-$app = new Slim();
-
 //With custom settings
 $app = new Slim(array(
-    'log.enable' => true,
-    'log.path' => './log',
-    'log.level' => 4,
-    'view' => 'MustacheView'
+	// 'log.enable' => true,
+	// 'log.path' => './log',
+	// 'log.level' => 4,
+	'view' => 'MustacheView'
 ));
 
-//GET route
-$app->get('/hello/:name', function ($name) {
-    echo "Hello, $name";
-});
+//mite API
+require APPDIR.'lib/mite/api.php';
+$api = Mite_Api::getInstance();
+$api->init($config['mite']['account'], $config['mite']['api_key']);
 
-//GET config
-// $app->get('/config', function () use ($config) {
-// 	echo Yaml::dump($config);
-// });
+//routes using $config, $api 
+require APPDIR.'routes/account.php';
 
 $app->run();
 ?>

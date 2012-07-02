@@ -3,3 +3,11 @@
 mite:
     account: "YOUR MITE ACCOUNT"
     api_key: "YOUR MITE API KEY"
+
+accounts:
+    "YOUR_ACCOUNT_IDENTIFIER":
+        mite_customer_name: "NAME OF YOUR MITE CUSTOMER"
+    "ANOTHER_ACCOUNT_IDENTIFIER":
+        mite_customer_name: "NAME OF ANOTHER MITE CUSTOMER"
+    "YET_ANOTHER_ACCOUNT_IDENTIFIER":
+        mite_customer_name: "NAME OF YET ANOTHER MITE CUSTOMER"
