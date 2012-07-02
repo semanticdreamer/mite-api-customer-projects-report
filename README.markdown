@@ -59,7 +59,7 @@ Project's PHP dependencies, managed by [Composer][composer].
 - [Mustache.php][mustachephp] - A Mustache implementation in PHP.
 - [Symfony YAML Component][symfonyyaml] - A Component that loads and dumps YAML files.
 
-## Dev Notes
+## Dev Notes (to-be-deleted)
 
 - [Slim Framework Documentation](http://www.slimframework.com/learn)
 
