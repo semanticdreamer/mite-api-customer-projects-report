@@ -1,13 +1,11 @@
 {
-    "hash": "2397ac8c473ad5d5b20a54411aaf3c6d",
+    "hash": "29ecdad5d9f7f203818952e546ab044f",
     "packages": [
         {
-            "package": "phly/mustache",
-            "version": "1.0.0"
-        },
-        {
             "package": "slim/extras",
-            "version": "1.0.2"
+            "version": "dev-release-1.0.3",
+            "source-reference": "a20c2376098bd3c849be88586832f83e8a19f1a8",
+            "commit-date": "1341062598"
         },
         {
             "package": "slim/slim",
@@ -23,7 +21,7 @@
 
     ],
     "minimum-stability": "dev",
-    "stability-flags": [
-
-    ]
+    "stability-flags": {
+        "slim/extras": 20
+    }
 }
