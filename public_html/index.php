@@ -2,7 +2,22 @@
 //relative path to application directory `app/`
 define("APPDIR", '../app/');
 
-//require 'vendor/autoload.php';
+//autoload dependencies managed by Composer
+require APPDIR.'vendor/autoload.php';
+
+//app configuration via Symfony's Yaml Component
+//require APPDIR.'vendor/symfony/yaml/Symfony/Component/Yaml/Parser.php';
+use Symfony\Component\Yaml\Parser;
+use Symfony\Component\Yaml\Exception\ParseException;
+use Symfony\Component\Yaml\Yaml;
+$yaml = new Parser();
+$config = null;
+try {
+    $config = $yaml->parse(file_get_contents(APPDIR.'config.yml'));
+} catch (ParseException $e) {
+    printf("Unable to parse the YAML string: %s", $e->getMessage());
+}
+
 //Slim Framework
 require APPDIR.'vendor/slim/slim/Slim/Slim.php';
 
@@ -26,20 +41,10 @@ $app->get('/hello/:name', function ($name) {
     echo "Hello, $name";
 });
 
-//POST route
-$app->post('/person', function () {
-    //Create new Person
-});
-
-//PUT route
-$app->put('/person/:id', function ($id) {
-    //Update Person identified by $id
-});
-
-//DELETE route
-$app->delete('/person/:id', function ($id) {
-    //Delete Person identified by $id
-});
+//GET config
+// $app->get('/config', function () use ($config) {
+// 	echo Yaml::dump($config);
+// });
 
 $app->run();
 ?>

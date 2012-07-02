@@ -1,5 +1,5 @@
 {
-    "hash": "6555fc92083c4491d29b3216270bf751",
+    "hash": "2397ac8c473ad5d5b20a54411aaf3c6d",
     "packages": [
         {
             "package": "phly/mustache",
@@ -12,6 +12,10 @@
         {
             "package": "slim/slim",
             "version": "1.6.4"
+        },
+        {
+            "package": "symfony/yaml",
+            "version": "v2.0.15"
         }
     ],
     "packages-dev": null,

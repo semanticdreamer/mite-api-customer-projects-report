@@ -57,9 +57,7 @@ Project's PHP dependencies, managed by [Composer][composer].
 - [Slim][slimframework] - A RESTful micro framework for PHP 5 inspired by Sinatra.
 - [Slim Framework Extras][slimextras] - Custom Views (e.g. `MustacheView`).
 - [Mustache.php][mustachephp] - A Mustache implementation in PHP.
-
-## Interesting Read
-
+- [Symfony YAML Component][symfonyyaml] - A Component that loads and dumps YAML files.
 
 ## Dev Notes
 
@@ -79,6 +77,10 @@ Install Dependencies via [Composer][composer]:
 
     cd app/ && /Applications/MAMP/bin/php/php5.3.6/bin/php composer.phar install
 
+Update Dependencies via [Composer][composer]:
+
+    cd app/ && /Applications/MAMP/bin/php/php5.3.6/bin/php composer.phar update
+
 [slimframework]:http://www.slimframework.com/ "Slim Framework - A RESTful micro framework for PHP 5 inspired by Sinatra."
 [slimextras]: https://github.com/codeguy/Slim-Extras "Slim Framework Extras (e.g. Custom Views)"
 [mustachephp]: https://github.com/bobthecow/mustache.php "Mustache.php - A Mustache implementation in PHP"
@@ -86,3 +88,4 @@ Install Dependencies via [Composer][composer]:
 [packagist]: http://packagist.org/ "Packagist - The PHP package archivist"
 [mamp]: http://www.mamp.info/ "MAMP - stands for: Macintosh, Apache, Mysql and PHP."
 [git]: http://git-scm.com/ "Git is a free and open source distributed version control system."
+[symfonyyaml]:https://github.com/symfony/Yaml "Symfony YAML Component"

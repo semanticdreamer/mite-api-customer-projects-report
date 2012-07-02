@@ -1,0 +1,5 @@
+# mite. API Authentication
+# You must enable the mite.api for your user within the webinterface of mite! It is disabled by default.
+mite:
+    account: "YOUR MITE ACCOUNT"
+    api_key: "YOUR MITE API KEY"
