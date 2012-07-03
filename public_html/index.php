@@ -23,21 +23,16 @@ try {
 //Slim Framework
 require APPDIR.'vendor/slim/slim/Slim/Slim.php';
 
-//Slim Custom View MustacheView
-// include APPDIR.'vendor/phly/mustache/library/Phly/Mustache/_autoload.php';
-// use Phly\Mustache\Mustache;
-// require APPDIR.'vendor/slim/extras/View/Mustache.php';
-require APPDIR.'ext/Mustache.php';
-$mustacheView = new View_Mustache();
-// $mustacheView->mustacheDirectory =  APPDIR.'vendor/phly/mustache/library/Phly/Mustache';
-$mustacheView->mustacheDirectory =  APPDIR.'ext';
+//Slim Custom View TwigView
+$twigView = new View_Twig();
+$twigView->twigDirectory = APPDIR.'vendor/twig/lib/twig';
 
 //With custom settings
 $app = new Slim(array(
 	// 'log.enable' => true,
 	// 'log.path' => './log',
 	// 'log.level' => 4,
-	'view' => $mustacheView,
+	'view' => $twigView,
 	'templates.path' => APPDIR.'templates'
 ));
 

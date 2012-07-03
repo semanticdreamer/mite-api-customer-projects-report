@@ -9,10 +9,8 @@ $app->get('/accounts/:id/', function ($id) use ($app, $config, $api) {
 	//var_dump($customer);
 	$data = array(
 		'brand' => $config['site']['title'],
-		'header_partial' => file_get_contents(APPDIR.'templates/partials/header.mustache'),
-		'footer_partial' => file_get_contents(APPDIR.'templates/partials/footer.mustache'),
 		'headline' => 'Account Details', 
 		'account_name' => $customer['name']);
-	$app->render('account.mustache', $data);
+	$app->render('account.twig', $data);
 });
 ?>
