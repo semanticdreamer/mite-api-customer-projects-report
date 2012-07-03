@@ -7,9 +7,12 @@ $app->get('/accounts/:id/', function ($id) use ($app, $config, $api) {
 	$customer = Mite_Api::getResourceByKeyValue('customer', 
 		'name', $miteCustomerName, json_decode($response, true));
 	//var_dump($customer);
-	$app->render('account.mustache', 
-		array('brand' => $config['site']['title'], 
-			'headline' => 'Account Details', 
-			'account_name' => $customer['name']));
+	$data = array(
+		'brand' => $config['site']['title'],
+		'header_partial' => file_get_contents(APPDIR.'templates/partials/header.mustache'),
+		'footer_partial' => file_get_contents(APPDIR.'templates/partials/footer.mustache'),
+		'headline' => 'Account Details', 
+		'account_name' => $customer['name']);
+	$app->render('account.mustache', $data);
 });
 ?>
