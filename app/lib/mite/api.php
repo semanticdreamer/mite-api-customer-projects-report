@@ -85,13 +85,13 @@ class Mite_Api
 	 **/
 	public static function getResourceByKeyValue($resource, $key, $value, $data)
 	{
-		$results = array_filter($data, 
+		$results = array_values(array_filter($data, 
 			function ($result) use($resource, $key, $value)
 			{
 				return $result[$resource][$key] == $value;
 			}
-		);
-		return $results[1][$resource];
+		));
+		return $results[0][$resource];
 	}
 }
 ?>
