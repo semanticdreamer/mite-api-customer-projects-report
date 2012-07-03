@@ -60,7 +60,7 @@ Project's PHP dependencies, managed by [Composer][composer].
 
 - [Slim][slimframework] - A RESTful micro framework for PHP 5 inspired by Sinatra.
 - [Slim Framework Extras][slimextras] - Custom Views (e.g. `MustacheView`).
-- [Mustache.php][mustachephp] - A Mustache implementation in PHP.
+- [Twig][twig] - The flexible, fast, and secure template language for PHP.
 - [Symfony YAML Component][symfonyyaml] - A Component that loads and dumps YAML files.
 - [Bootstrap, from Twitter][twitterbootstrap] - Simple and flexible HTML, CSS, and Javascript for popular user interface components and interactions."
 
@@ -88,7 +88,7 @@ Update Dependencies via [Composer][composer]:
 
 [slimframework]:http://www.slimframework.com/ "Slim Framework - A RESTful micro framework for PHP 5 inspired by Sinatra."
 [slimextras]: https://github.com/codeguy/Slim-Extras "Slim Framework Extras (e.g. Custom Views)"
-[mustachephp]: https://github.com/bobthecow/mustache.php "Mustache.php - A Mustache implementation in PHP"
+[twig]: http://twig.sensiolabs.org/ "Twig, the flexible, fast, and secure template language for PHP."
 [composer]: http://getcomposer.org/ "Composer - Dependency Manager for PHP"
 [packagist]: http://packagist.org/ "Packagist - The PHP package archivist"
 [mamp]: http://www.mamp.info/ "MAMP - stands for: Macintosh, Apache, Mysql and PHP."

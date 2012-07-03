@@ -10,3 +10,6 @@
 [submodule "dependencies/twitter-bootstrap"]
 	path = dependencies/twitter-bootstrap
 	url = git://github.com/twitter/bootstrap.git
+[submodule "dependencies/Twig"]
+	path = dependencies/Twig
+	url = git://github.com/fabpot/Twig.git

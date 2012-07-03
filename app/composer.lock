@@ -1,5 +1,5 @@
 {
-    "hash": "29ecdad5d9f7f203818952e546ab044f",
+    "hash": "978ede97c67e47ebb33806e6abb22b09",
     "packages": [
         {
             "package": "slim/extras",
@@ -14,6 +14,10 @@
         {
             "package": "symfony/yaml",
             "version": "v2.0.15"
+        },
+        {
+            "package": "twig/twig",
+            "version": "v1.8.3"
         }
     ],
     "packages-dev": null,
