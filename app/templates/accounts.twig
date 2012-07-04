@@ -3,8 +3,6 @@
   <h1>Accounts <small>{{ brand }}</small></h1>
 </div>
 
-<h2>Accounts</h2>
-
 <table class="table">
   <thead>
     <tr>
@@ -16,7 +14,7 @@
       <tr>
         <td>
           <a href="{{ urlFor('account', {"id": id }) }}">
-            {{ account['mite_customer_name'] }}</a>
+            <abbr title="{{ id }}">{{ account['mite_customer_name'] }}</a>
         </td>
       </tr>
     {% endfor %}
