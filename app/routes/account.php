@@ -8,14 +8,15 @@ $app->get('/accounts/', function () use ($app, $config, $api) {
 })->name('accounts');
 
 //GET route for account by id
-$app->get('/accounts/:id/', function ($id) use ($app, $config, $api) {
-	$miteCustomerName = $config['accounts'][$id]['mite_customer_name'];
-	$projects = $api->sendGetRequest('/projects.json');
+$app->get('/accounts/:accountid/', function ($accountid) use ($app, $config, $api) {
+	$miteCustomerName = $config['accounts'][$accountid]['mite_customer_name'];
+	$projects = json_decode($api->sendGetRequest('/projects.json'), true);
 	$projectsForAccount = Mite_Api::getResourcesByKeyValue('project', 
-		'customer_name', $miteCustomerName, json_decode($projects, true));
+		'customer_name', $miteCustomerName, $projects);
 	$data = array(
 		'brand' => $config['site']['title'],
 		'account_name' => $miteCustomerName,
+		'account_id' => $accountid,
 		'projects' => $projectsForAccount);
 	$app->render('account.twig', $data);
 })->name('account');

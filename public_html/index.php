@@ -46,7 +46,7 @@ $api->init($config['mite']['account'], $config['mite']['api_key']);
 
 //routes using $app, $config, $api 
 require APPDIR.'routes/account.php';
-require APPDIR.'routes/project.php';
+require APPDIR.'routes/account_project.php';
 
 $app->get('/', function () use ($app) {
     $app->redirect('/accounts/');

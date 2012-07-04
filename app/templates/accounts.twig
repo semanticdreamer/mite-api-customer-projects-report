@@ -10,11 +10,11 @@
     </tr>
   </thead>
   <tbody>
-    {% for id, account in accounts %}
+    {% for accountid, account in accounts %}
       <tr>
         <td>
-          <a href="{{ urlFor('account', {"id": id }) }}">
-            <abbr title="{{ id }}">{{ account['mite_customer_name'] }}</a>
+          <a href="{{ urlFor('account', {"accountid": accountid }) }}">
+            <abbr title="{{ accountid }}">{{ account['mite_customer_name'] }}</a>
         </td>
       </tr>
     {% endfor %}

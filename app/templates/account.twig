@@ -15,7 +15,7 @@
     {% for project in projects %}
       <tr>
         <td>
-          <a href="{{ urlFor('project', {"id": project['project']['id']}) }}">
+          <a href="{{ urlFor('project', {"accountid": account_id, "projectid": project['project']['id']}) }}">
             {{ project['project']['name'] }}</a>
         </td>
       </tr>
