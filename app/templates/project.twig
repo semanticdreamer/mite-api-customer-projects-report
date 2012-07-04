@@ -6,16 +6,16 @@
 
 <h2>Time entries</h2>
 
-<table class="table">
+<table class="table table-condensed">
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Service</th>
-      <th>User</th>
-      <th>Comment</th>
-      <th>Minutes</th>
-      <th>&euro;</th>
-      <th>Billable?</th>
+      <th class="nowrap"><i class="icon-calendar"></i>&nbsp;Date</th>
+      <th class="nowrap"><i class="icon-wrench"></i>&nbsp;Service</th>
+      <th class="nowrap"><i class="icon-user"></i>&nbsp;User</th>
+      <th class="nowrap"><i class="icon-comment"></i>&nbsp;Comment</th>
+      <th class="nowrap"><i class="icon-time"></i>&nbsp;Minutes</th>
+      <th class="nowrap">&euro;&nbsp;Amount</th>
+      <th class="nowrap"><i class="icon-check"></i>&nbsp;Billable?</th>
     </tr>
   </thead>
   <tbody>
@@ -29,7 +29,7 @@
         <td>{{ (time_entry.time_entry.revenue / 100)|number_format(2, ',', '.') }} &euro;</td>
         <td>
           {% if time_entry.time_entry.billable %}
-            <span class="label label-success">yes</span>
+            <span class="label label-info">yes</span>
           {% endif %}
           {% if not time_entry.time_entry.billable %}
             <span class="label">no</span>

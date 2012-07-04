@@ -13,6 +13,8 @@
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
+      table th.actions {width: 100px;}
+      table th.nowrap {white-space:nowrap;}
     </style>
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
 
@@ -41,9 +43,11 @@
           </a>
           <a class="brand" href="{{ urlFor('accounts') }}">{{brand}}</a>
           <div class="nav-collapse">
-            <!-- <ul class="nav">
-              <li class="active"><a href="#">Account</a></li>
-            </ul> -->
+            {% if account_id is defined and account_name is defined %}
+              <ul class="nav">
+                <li class="active"><a href="{{ urlFor('account', {"accountid": account_id }) }}"><i class="icon-home icon-white"></i>&nbsp;{{ account_name }}</a></li>
+              </ul>
+            {% endif %}
           </div><!--/.nav-collapse -->
         </div>
       </div>

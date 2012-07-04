@@ -5,18 +5,21 @@
 
 <h2>Projects</h2>
 
-<table class="table">
+<table class="table table-condensed">
   <thead>
     <tr>
+      <th class="actions">&nbsp;</th>
       <th>Name</th>
     </tr>
   </thead>
   <tbody>
     {% for project in projects %}
       <tr>
+        <td class="pull-right">
+          <a href="{{ urlFor('project', {"accountid": account_id, "projectid": project['project']['id']}) }}" class="btn btn-info btn-mini"><i class="icon-time icon-white"></i>&nbsp;Time entries</a>
+        </td>
         <td>
-          <a href="{{ urlFor('project', {"accountid": account_id, "projectid": project['project']['id']}) }}">
-            {{ project['project']['name'] }}</a>
+          {{ project['project']['name'] }}
         </td>
       </tr>
     {% endfor %}
