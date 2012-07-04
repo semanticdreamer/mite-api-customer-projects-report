@@ -1,16 +1,22 @@
 <?php
-//GET route for account
-$app->get('/accounts/:id/', function ($id) use ($app, $config, $api) {
-	//load mite customer
-	$response = $api->sendGetRequest('/customers.json');
-	$miteCustomerName = $config['accounts'][$id]['mite_customer_name'];
-	$customer = Mite_Api::getResourceByKeyValue('customer', 
-		'name', $miteCustomerName, json_decode($response, true));
-	//var_dump($customer);
+//GET route for accounts
+$app->get('/accounts/', function () use ($app, $config, $api) {
 	$data = array(
 		'brand' => $config['site']['title'],
-		'headline' => 'Account Details', 
-		'account_name' => $customer['name']);
+		'accounts' => $config['accounts']);
+	$app->render('accounts.twig', $data);
+})->name('accounts');
+
+//GET route for account by id
+$app->get('/accounts/:id/', function ($id) use ($app, $config, $api) {
+	$miteCustomerName = $config['accounts'][$id]['mite_customer_name'];
+	$projects = $api->sendGetRequest('/projects.json');
+	$projectsForAccount = Mite_Api::getResourcesByKeyValue('project', 
+		'customer_name', $miteCustomerName, json_decode($projects, true));
+	$data = array(
+		'brand' => $config['site']['title'],
+		'account_name' => $miteCustomerName,
+		'projects' => $projectsForAccount);
 	$app->render('account.twig', $data);
-});
+})->name('account');
 ?>

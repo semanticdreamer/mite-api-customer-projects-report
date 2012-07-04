@@ -26,6 +26,8 @@ require APPDIR.'vendor/slim/slim/Slim/Slim.php';
 //Slim Custom View TwigView
 $twigView = new View_Twig();
 $twigView->twigDirectory = APPDIR.'vendor/twig/lib/twig';
+$twigView->twigExtensions = array(new Twig_Extension_Debug(), new Twig_Extensions_Slim());
+$twigView->twigOptions = array('debug' => true);
 
 //With custom settings
 $app = new Slim(array(
@@ -44,6 +46,11 @@ $api->init($config['mite']['account'], $config['mite']['api_key']);
 
 //routes using $app, $config, $api 
 require APPDIR.'routes/account.php';
+require APPDIR.'routes/project.php';
+
+$app->get('/', function () use ($app) {
+    $app->redirect('/accounts/');
+});
 
 $app->run();
 ?>

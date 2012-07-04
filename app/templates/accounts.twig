@@ -1,9 +1,9 @@
 {% include 'includes/header.twig' %}
 <div class="page-header">
-  <h1>Account <small>{{ account_name }}</small></h1>
+  <h1>Accounts <small>{{ brand }}</small></h1>
 </div>
 
-<h2>Projects</h2>
+<h2>Accounts</h2>
 
 <table class="table">
   <thead>
@@ -12,11 +12,11 @@
     </tr>
   </thead>
   <tbody>
-    {% for project in projects %}
+    {% for id, account in accounts %}
       <tr>
         <td>
-          <a href="{{ urlFor('project', {"id": project['project']['id']}) }}">
-            {{ project['project']['name'] }}</a>
+          <a href="{{ urlFor('account', {"id": id }) }}">
+            {{ account['mite_customer_name'] }}</a>
         </td>
       </tr>
     {% endfor %}

@@ -1,0 +1,43 @@
+{% include 'includes/header.twig' %}
+
+<div class="page-header">
+  <h1>Project <small>{{ project.project.name }}</small></h1>
+</div>
+
+<h2>Time entries</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Service</th>
+      <th>User</th>
+      <th>Comment</th>
+      <th>Minutes</th>
+      <th>&euro;</th>
+      <th>Billable?</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for time_entry in time_entries %}
+      <tr>
+        <td>{{ time_entry.time_entry.date_at|date("d.m.Y", "Europe/Paris") }}</td>
+        <td>{{ time_entry.time_entry.service_name }}</td>
+        <td>{{ time_entry.time_entry.user_name }}</td>
+        <td>{{ time_entry.time_entry.note }}</td>
+        <td>{{ time_entry.time_entry.minutes }}</td>
+        <td>{{ (time_entry.time_entry.revenue / 100)|number_format(2, ',', '.') }} &euro;</td>
+        <td>
+          {% if time_entry.time_entry.billable %}
+            <span class="label label-success">yes</span>
+          {% endif %}
+          {% if not time_entry.time_entry.billable %}
+            <span class="label">no</span>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% include 'includes/footer.twig' %}

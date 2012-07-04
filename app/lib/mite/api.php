@@ -63,7 +63,7 @@ class Mite_Api
 			$this->account.'.'
 			.self::MITE_DOMAIN.
 			$resourcePath.
-			'?api_key='.$this->apiKey;
+			(strstr($resourcePath, '?') ? '&' : '?') . 'api_key='.$this->apiKey;
 		$curl = curl_init();
 		curl_setopt ($curl, CURLOPT_URL,$requestUrl);
 		curl_setopt ($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -76,14 +76,14 @@ class Mite_Api
 	
 	/**
 	 * Filter resources array by key/ value,
-	 * e.g. to find resource in collection.
+	 * e.g. to find resource(s) in collection.
 	 * @param string $resource, e.g. 'customer'
 	 * @param string $key
 	 * @param string $value
 	 * @param string $data, i.e. array to filter
 	 * @return array $results
 	 **/
-	public static function getResourceByKeyValue($resource, $key, $value, $data)
+	public static function getResourcesByKeyValue($resource, $key, $value, $data)
 	{
 		$results = array_values(array_filter($data, 
 			function ($result) use($resource, $key, $value)
@@ -91,7 +91,7 @@ class Mite_Api
 				return $result[$resource][$key] == $value;
 			}
 		));
-		return $results[0][$resource];
+		return $results;
 	}
 }
 ?>
