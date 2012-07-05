@@ -10,17 +10,25 @@
     <thead>
       <tr>
         <th class="actions">&nbsp;</th>
-        <th>Name</th>
+        <th>Id</th>
+        <th>mite. Customer Name</th>
+        <th>Informal Salutation</th>
       </tr>
     </thead>
     <tbody>
       {% for accountid, account in accounts %}
         <tr>
           <td class="pull-right">
-            <a href="{{ urlFor('account', {"accountid": accountid }) }}" class="btn btn-info btn-mini"><i class="icon-list-alt icon-white"></i>&nbsp;Project list&nbsp;»</a>
+            <a href="{{ urlFor('account', {"accountid": accountid }) }}" class="btn btn-info btn-mini"><i class="icon-briefcase icon-white"></i>&nbsp;Account info&nbsp;»</a>
           </td>
           <td>
-            <abbr title="{{ accountid }}">{{ account['mite_customer_name'] }}
+            {{ accountid }}
+          </td>
+          <td>
+            {{ account['mite_customer_name'] }}
+          </td>
+          <td>
+            {{ account['informal_salutation'] }}
           </td>
         </tr>
       {% endfor %}
