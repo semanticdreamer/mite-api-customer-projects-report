@@ -66,9 +66,13 @@ Slim_Route::setDefaultConditions(array(
 $app->add(new Middleware_Auth_HttpBasic($config['app']['slim_framework']['authentication']['username'], $config['app']['slim_framework']['authentication']['password']));
 
 //routes using $app, $config, $api 
-require APPDIR.'routes/welcome.php';
 require APPDIR.'routes/account.php';
 require APPDIR.'routes/account_project.php';
+
+//GET route for '/' (index)
+$app->get('/', function () use ($app) {
+    $app->redirect('/accounts/');
+})->name('index');
 
 $app->run();
 ?>

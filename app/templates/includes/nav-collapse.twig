@@ -1,4 +1,22 @@
 <div class="nav-collapse">
+  {% if brand is defined and accounts is defined %}
+    <ul class="nav">
+      <li class="dropdown active">
+        <a href="#"
+              class="dropdown-toggle"
+              data-toggle="dropdown">
+              {{ brand }}
+              <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="nav-header">Account list</li>
+          {% for accountid, account in accounts %}
+            <li><a href="{{ urlFor('account', {"accountid": accountid }) }}">{{ account['mite_customer_name'] }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+    </ul>
+  {% endif %}
   {% if account_id is defined and account_name is defined and projects is defined %}
     <ul class="nav">
       <li class="dropdown active">
