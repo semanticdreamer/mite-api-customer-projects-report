@@ -55,14 +55,26 @@ require APPDIR.'lib/mite/api.php';
 $api = Mite_Api::getInstance();
 $api->init($config['mite']['account'], $config['mite']['api_key']);
 
-// app-wide route conditions
+//app-wide route conditions
 $accountIdConditionRegex = '(' . implode('|', array_keys($config['accounts'])) . ')';
 Slim_Route::setDefaultConditions(array(
     'accountid' => $accountIdConditionRegex
 ));
 
+//authentication
+$authConfig = array(
+    'provider' => '',
+    'dsn' => 'mysql:host=localhost;dbname=slimdev',
+    'dbuser' => 'serverside',
+    'dbpass' => 'password',
+    'auth.type' => 'http',
+    'login.url' => '/login',
+    'security.urls' => array(
+        array('path' => '/accounts/.+'),
+    ),
+);
+
 //routes using $app, $config, $api 
-require APPDIR.'routes/login.php';
 require APPDIR.'routes/welcome.php';
 require APPDIR.'routes/account.php';
 require APPDIR.'routes/account_project.php';
