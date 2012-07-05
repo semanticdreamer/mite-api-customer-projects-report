@@ -1,6 +1,6 @@
 # mite-api-customer-projects-report
 
-Summarized report of time tracked per customer on mite. projects.
+Summarized report of time tracked per customer on [mite.][mite] projects.
 
 ## Setup
 
@@ -12,9 +12,11 @@ Install PHP Dependencies, managed by [Composer][composer] (execute in project ro
 
     php composer.phar install
 
-(Optional) Install Dependencies as [Git][git] `submodules` into `dependencies/` (execute in project root):
+(Optional, recommended for development environment though, e.g. to have documentation at hand) Install Dependencies as [Git][git] `submodules` into `dependencies/` (execute in project root):
 
     git submodule update --init --recursive
+
+Rename `config.yml.dist` to `config.yml` and adjust configuration to your needs, in particular add mite. customer account information in section `accounts`.
 
 ## File System Layout
 
@@ -86,6 +88,7 @@ Update Dependencies via [Composer][composer]:
 
     cd app/ && /Applications/MAMP/bin/php/php5.3.6/bin/php composer.phar update
 
+[mite]: http://mite.yo.lk/ "mite."
 [slimframework]:http://www.slimframework.com/ "Slim Framework - A RESTful micro framework for PHP 5 inspired by Sinatra."
 [slimextras]: https://github.com/codeguy/Slim-Extras "Slim Framework Extras (e.g. Custom Views)"
 [twig]: http://twig.sensiolabs.org/ "Twig, the flexible, fast, and secure template language for PHP."
