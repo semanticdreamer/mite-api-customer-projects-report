@@ -27,16 +27,27 @@ require APPDIR.'vendor/slim/slim/Slim/Slim.php';
 $twigView = new View_Twig();
 $twigView->twigDirectory = APPDIR.'vendor/twig/lib/twig';
 $twigView->twigExtensions = array(new Twig_Extension_Debug(), new Twig_Extensions_Slim());
-$twigView->twigOptions = array('debug' => true);
+$twigView->twigOptions = array('mode' => $config['app']['slim_framework']['settings']['mode']);
 
 //With custom settings
 $app = new Slim(array(
-	// 'log.enable' => true,
-	// 'log.path' => './log',
-	// 'log.level' => 4,
 	'view' => $twigView,
 	'templates.path' => APPDIR.'templates'
 ));
+
+$app->configureMode('production', function () use ($app) {
+    $app->config(array(
+        'log.enable' => true,
+        'debug' => false
+    ));
+});
+
+$app->configureMode('development', function () use ($app) {
+    $app->config(array(
+        'log.enable' => false,
+        'debug' => true
+    ));
+});
 
 
 //mite API
