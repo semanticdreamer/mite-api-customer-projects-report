@@ -1,10 +1,6 @@
 {% include 'includes/header.twig' %}
 
 <div class="container">
-
-  <div class="page-header">
-    <h1>Account <small>{{ account_name }}</small></h1>
-  </div>
   
   <!-- Main hero unit for a primary marketing message or call to action -->
   <div class="hero-unit">
@@ -12,6 +8,16 @@
     <p>A lot of work has already been done...</p>
     <p><a class="btn btn-primary btn-large" href="{{ urlFor('projects', {"accountid": account_id }) }}"><i class="icon-list-alt icon-white"></i>&nbsp;Project list&nbsp;»</a></p>
   </div>
+
+  <div class="page-header">
+    <h1>Account <small>{{ account_name }}</small></h1>
+  </div>
+
+  <strong><i class="icon-pencil"></i>&nbsp;Note</strong>
+
+  <address>
+    {{ account[0].customer.note|escape|nl2br }}
+  </address>
 
 </div> <!-- /container -->
 

@@ -15,7 +15,7 @@
   {% endif %}
 
   <div class="page-header">
-    <h2>Project <small>{{ project.project.name }}</small></h2>
+    <h2>Project <small>{{ project.project.name|escape }}</small></h2>
   </div>
   
   <h2>Time entries</h2>
@@ -36,9 +36,9 @@
       {% for time_entry in time_entries %}
         <tr>
           <td>{{ time_entry.time_entry.date_at|date("d.m.Y", "Europe/Paris") }}</td>
-          <td>{{ time_entry.time_entry.service_name }}</td>
-          <td>{{ time_entry.time_entry.user_name }}</td>
-          <td>{{ time_entry.time_entry.note }}</td>
+          <td>{{ time_entry.time_entry.service_name|escape }}</td>
+          <td>{{ time_entry.time_entry.user_name|escape }}</td>
+          <td>{{ time_entry.time_entry.note|escape|nl2br }}</td>
           <td>{{ time_entry.time_entry.minutes }}</td>
           <td>{{ (time_entry.time_entry.revenue / 100)|number_format(2, ',', '.') }} &euro;</td>
           <td>
