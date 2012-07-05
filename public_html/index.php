@@ -62,12 +62,9 @@ Slim_Route::setDefaultConditions(array(
 ));
 
 //routes using $app, $config, $api 
+require APPDIR.'routes/welcome.php';
 require APPDIR.'routes/account.php';
 require APPDIR.'routes/account_project.php';
-
-$app->get('/', function () use ($app) {
-    $app->redirect('/accounts/');
-});
 
 $app->run();
 ?>
