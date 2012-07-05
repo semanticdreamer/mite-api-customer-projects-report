@@ -2,7 +2,7 @@
 //GET route for accounts
 $app->get('/accounts/', function () use ($app, $config, $api) {
 	$data = array(
-		'brand' => $config['site']['title'],
+		'brand' => $config['app']['title'],
 		'accounts' => $config['accounts']);
 	$app->render('accounts.twig', $data);
 })->name('accounts');
@@ -13,7 +13,7 @@ $app->get('/accounts/:accountid/', function ($accountid) use ($app, $config, $ap
 	$informalSalutation = $config['accounts'][$accountid]['informal_salutation'];
 	$customer = json_decode($api->sendGetRequest('/customers.json?name='.urlencode($miteCustomerName)), true);
 	$data = array(
-		'brand' => $config['site']['title'],
+		'brand' => $config['app']['title'],
 		'account_name' => $miteCustomerName,
 		'account_salutation' => $informalSalutation,
 		'account' => $customer,

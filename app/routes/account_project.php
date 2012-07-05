@@ -7,7 +7,7 @@ $app->get('/accounts/:accountid/projects/', function ($accountid) use ($app, $co
 	$projectsForAccount = Mite_Api::getResourcesByKeyValue('project', 
 		'customer_name', $miteCustomerName, $projects);
 	$data = array(
-		'brand' => $config['site']['title'],
+		'brand' => $config['app']['title'],
 		'account_name' => $miteCustomerName,
 		'account_id' => $accountid,
 		'projects' => $projectsForAccount);
@@ -20,7 +20,7 @@ $app->get('/accounts/:accountid/projects/:projectid/', function ($accountid, $pr
 	$project = json_decode($api->sendGetRequest('/projects/'.$projectid.'.json'), true);
 	$time_entries = json_decode($api->sendGetRequest('/time_entries.json?project_id='.$projectid), true);
 	$data = array(
-		'brand' => $config['site']['title'],
+		'brand' => $config['app']['title'],
 		'project' => $project,
 		'account_name' => $miteCustomerName,
 		'account_id' => $accountid,

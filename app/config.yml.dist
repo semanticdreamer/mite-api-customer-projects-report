@@ -1,6 +1,6 @@
 # mite. API Authentication
 # You must enable the mite.api for your user within the webinterface of mite! It is disabled by default.
-site:
+app:
     title: "YOUR SITE TITLE"
 
 mite:
