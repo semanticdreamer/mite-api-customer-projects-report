@@ -5,7 +5,10 @@
   {% if account_id is defined and account_name is defined %}
     <ul class="breadcrumb">
       <li>
-        <a href="{{ urlFor('account', {"accountid": account_id }) }}">Project list</a> <span class="divider">/</span>
+        <a href="{{ urlFor('account', {"accountid": account_id }) }}">Account home</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a href="{{ urlFor('projects', {"accountid": account_id }) }}">Project list</a> <span class="divider">/</span>
       </li>
       <li class="active">Project info</li>
     </ul>

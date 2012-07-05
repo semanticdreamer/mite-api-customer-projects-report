@@ -17,7 +17,7 @@
       {% for accountid, account in accounts %}
         <tr>
           <td class="pull-right">
-            <a href="{{ urlFor('account', {"accountid": accountid }) }}" class="btn btn-info btn-mini"><i class="icon-list-alt icon-white"></i>&nbsp;Project list</a>
+            <a href="{{ urlFor('account', {"accountid": accountid }) }}" class="btn btn-info btn-mini"><i class="icon-list-alt icon-white"></i>&nbsp;Project list&nbsp;»</a>
           </td>
           <td>
             <abbr title="{{ accountid }}">{{ account['mite_customer_name'] }}

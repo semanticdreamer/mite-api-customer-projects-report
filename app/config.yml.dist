@@ -10,7 +10,10 @@ mite:
 accounts:
     "YOUR_ACCOUNT_IDENTIFIER":
         mite_customer_name: "NAME OF YOUR MITE CUSTOMER"
+        informal_salutation: "INFORMAL SALUTATION FOR YOUR CUSTOMER"
     "ANOTHER_ACCOUNT_IDENTIFIER":
         mite_customer_name: "NAME OF ANOTHER MITE CUSTOMER"
+        informal_salutation: "INFORMAL SALUTATION FOR YOUR CUSTOMER"
     "YET_ANOTHER_ACCOUNT_IDENTIFIER":
         mite_customer_name: "NAME OF YET ANOTHER MITE CUSTOMER"
+        informal_salutation: "INFORMAL SALUTATION FOR YOUR CUSTOMER"
