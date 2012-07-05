@@ -1,0 +1,20 @@
+<div class="nav-collapse">
+  {% if account_id is defined and account_name is defined and projects is defined %}
+    <ul class="nav">
+      <li class="dropdown active">
+        <a href="#"
+              class="dropdown-toggle"
+              data-toggle="dropdown">
+              {{ account_name }}
+              <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="nav-header">Project list</li>
+          {% for project in projects %}
+            <li><a href="{{ urlFor('project', {"accountid": account_id, "projectid": project['project']['id']}) }}">{{ project['project']['name']}}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+    </ul>
+  {% endif %}
+</div><!--/.nav-collapse -->
