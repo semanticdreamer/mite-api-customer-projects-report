@@ -62,17 +62,8 @@ Slim_Route::setDefaultConditions(array(
 ));
 
 //authentication
-$authConfig = array(
-    'provider' => '',
-    'dsn' => 'mysql:host=localhost;dbname=slimdev',
-    'dbuser' => 'serverside',
-    'dbpass' => 'password',
-    'auth.type' => 'http',
-    'login.url' => '/login',
-    'security.urls' => array(
-        array('path' => '/accounts/.+'),
-    ),
-);
+//require HTTP basic auth for all routes
+$app->add(new Middleware_Auth_HttpBasic($config['app']['slim_framework']['authentication']['username'], $config['app']['slim_framework']['authentication']['password']));
 
 //routes using $app, $config, $api 
 require APPDIR.'routes/welcome.php';

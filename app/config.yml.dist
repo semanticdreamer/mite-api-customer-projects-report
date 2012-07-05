@@ -5,6 +5,9 @@ app:
     slim_framework:
         settings:
             mode: "production"
+        authentication:
+            username: "YOUR USERNAME"
+            password: "YOUR PASSWORD"
 
 mite:
     account: "YOUR MITE ACCOUNT"
