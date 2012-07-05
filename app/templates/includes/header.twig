@@ -43,14 +43,11 @@
           </a>
           <a class="brand" href="{{ urlFor('accounts') }}">{{brand}}</a>
           <div class="nav-collapse">
-            {% if account_id is defined and account_name is defined %}
-              <ul class="nav">
-                <li class="active"><a href="{{ urlFor('account', {"accountid": account_id }) }}"><i class="icon-home icon-white"></i>&nbsp;{{ account_name }}</a></li>
-              </ul>
-            {% endif %}
+              <!-- <ul class="nav">
+                <li class="active"><a href="#">Home</a></li>
+              </ul> -->
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
 
-    <div class="container">

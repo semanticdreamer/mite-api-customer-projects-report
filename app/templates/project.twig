@@ -1,43 +1,56 @@
 {% include 'includes/header.twig' %}
 
-<div class="page-header">
-  <h1>Project <small>{{ project.project.name }}</small></h1>
-</div>
+<div class="container">
 
-<h2>Time entries</h2>
+  {% if account_id is defined and account_name is defined %}
+    <ul class="breadcrumb">
+      <li>
+        <a href="{{ urlFor('account', {"accountid": account_id }) }}">Project list</a> <span class="divider">/</span>
+      </li>
+      <li class="active">Project info</li>
+    </ul>
+  {% endif %}
 
-<table class="table table-condensed">
-  <thead>
-    <tr>
-      <th class="nowrap"><i class="icon-calendar"></i>&nbsp;Date</th>
-      <th class="nowrap"><i class="icon-wrench"></i>&nbsp;Service</th>
-      <th class="nowrap"><i class="icon-user"></i>&nbsp;User</th>
-      <th class="nowrap"><i class="icon-comment"></i>&nbsp;Comment</th>
-      <th class="nowrap"><i class="icon-time"></i>&nbsp;Minutes</th>
-      <th class="nowrap">&euro;&nbsp;Amount</th>
-      <th class="nowrap"><i class="icon-check"></i>&nbsp;Billable?</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for time_entry in time_entries %}
+  <div class="page-header">
+    <h2>Project <small>{{ project.project.name }}</small></h2>
+  </div>
+  
+  <h2>Time entries</h2>
+  
+  <table class="table table-condensed">
+    <thead>
       <tr>
-        <td>{{ time_entry.time_entry.date_at|date("d.m.Y", "Europe/Paris") }}</td>
-        <td>{{ time_entry.time_entry.service_name }}</td>
-        <td>{{ time_entry.time_entry.user_name }}</td>
-        <td>{{ time_entry.time_entry.note }}</td>
-        <td>{{ time_entry.time_entry.minutes }}</td>
-        <td>{{ (time_entry.time_entry.revenue / 100)|number_format(2, ',', '.') }} &euro;</td>
-        <td>
-          {% if time_entry.time_entry.billable %}
-            <span class="label label-info">yes</span>
-          {% endif %}
-          {% if not time_entry.time_entry.billable %}
-            <span class="label">no</span>
-          {% endif %}
-        </td>
+        <th class="nowrap"><i class="icon-calendar"></i>&nbsp;Date</th>
+        <th class="nowrap"><i class="icon-wrench"></i>&nbsp;Service</th>
+        <th class="nowrap"><i class="icon-user"></i>&nbsp;User</th>
+        <th class="nowrap"><i class="icon-comment"></i>&nbsp;Comment</th>
+        <th class="nowrap"><i class="icon-time"></i>&nbsp;Minutes</th>
+        <th class="nowrap">&euro;&nbsp;Amount</th>
+        <th class="nowrap"><i class="icon-check"></i>&nbsp;Billable?</th>
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {% for time_entry in time_entries %}
+        <tr>
+          <td>{{ time_entry.time_entry.date_at|date("d.m.Y", "Europe/Paris") }}</td>
+          <td>{{ time_entry.time_entry.service_name }}</td>
+          <td>{{ time_entry.time_entry.user_name }}</td>
+          <td>{{ time_entry.time_entry.note }}</td>
+          <td>{{ time_entry.time_entry.minutes }}</td>
+          <td>{{ (time_entry.time_entry.revenue / 100)|number_format(2, ',', '.') }} &euro;</td>
+          <td>
+            {% if time_entry.time_entry.billable %}
+              <span class="label label-info">yes</span>
+            {% endif %}
+            {% if not time_entry.time_entry.billable %}
+              <span class="label">no</span>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div> <!-- /container -->
 
 {% include 'includes/footer.twig' %}
