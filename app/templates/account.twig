@@ -5,7 +5,11 @@
   <!-- Main hero unit for a primary marketing message or call to action -->
   <div class="hero-unit">
     <h1>Hello, {{ account_salutation }}!</h1>
-    <p>A lot of work has already been done...</p>
+    <blockquote class="pull-right">
+      <p>A lot of work has already been done.</p>
+      <small>{{ brand }}</small>
+    </blockquote>
+    <p>&nbsp;</p>
     <p><a class="btn btn-primary btn-large" href="{{ urlFor('projects', {"accountid": account_id }) }}"><i class="icon-list-alt icon-white"></i>&nbsp;Project list&nbsp;»</a></p>
   </div>
 

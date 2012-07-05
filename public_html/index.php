@@ -62,6 +62,7 @@ Slim_Route::setDefaultConditions(array(
 ));
 
 //routes using $app, $config, $api 
+require APPDIR.'routes/login.php';
 require APPDIR.'routes/welcome.php';
 require APPDIR.'routes/account.php';
 require APPDIR.'routes/account_project.php';
