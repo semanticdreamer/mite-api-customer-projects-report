@@ -29,12 +29,13 @@ $twigView->twigDirectory = APPDIR.'vendor/twig/lib/twig';
 $twigView->twigExtensions = array(new Twig_Extension_Debug(), new Twig_Extensions_Slim());
 $twigView->twigOptions = array('mode' => $config['app']['slim_framework']['settings']['mode']);
 
-//With custom settings
+//app, with custom settings
 $app = new Slim(array(
 	'view' => $twigView,
 	'templates.path' => APPDIR.'templates'
 ));
 
+//app mode 'production'
 $app->configureMode('production', function () use ($app) {
     $app->config(array(
         'log.enable' => true,
@@ -42,13 +43,13 @@ $app->configureMode('production', function () use ($app) {
     ));
 });
 
+//app mode 'development'
 $app->configureMode('development', function () use ($app) {
     $app->config(array(
         'log.enable' => false,
         'debug' => true
     ));
 });
-
 
 //mite API
 require APPDIR.'lib/mite/api.php';
@@ -61,8 +62,7 @@ Slim_Route::setDefaultConditions(array(
     'accountid' => $accountIdConditionRegex
 ));
 
-//authentication
-//require HTTP basic auth for all routes
+//authentication, require HTTP basic auth for all routes
 $app->add(new Middleware_Auth_HttpBasic($config['app']['slim_framework']['authentication']['username'], $config['app']['slim_framework']['authentication']['password']));
 
 //routes using $app, $config, $api 

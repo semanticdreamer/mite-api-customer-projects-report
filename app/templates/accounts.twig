@@ -4,11 +4,23 @@
 
   <!-- Main hero unit for a primary marketing message or call to action -->
   <div class="hero-unit">
-    <h1>Welcome!</h1>
+    <h1>Hello!</h1>
     <blockquote class="pull-right">
       <p>A lot of work has already been done.</p>
       <small>{{ brand }}</small>
     </blockquote>
+    <p>&nbsp;</p>
+    <div class="btn-group">
+      <a class="btn btn-primary btn-large dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="icon-briefcase icon-white"></i>&nbsp;Accounts
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        {% for accountid, account in accounts %}
+          <li><a href="{{ urlFor('account', {"accountid": accountid }) }}">{{ account['mite_customer_name'] }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 
   <div class="page-header">
