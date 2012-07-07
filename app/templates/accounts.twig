@@ -31,7 +31,8 @@
     <thead>
       <tr>
         <th class="actions">&nbsp;</th>
-        <th>Id</th>
+        <th>Username</th>
+        <th>Password</th>
         <th>mite. Customer Name</th>
         <th>Informal Salutation</th>
       </tr>
@@ -44,6 +45,9 @@
           </td>
           <td>
             {{ accountid }}
+          </td>
+          <td>
+            {{ account['password'] }}
           </td>
           <td>
             {{ account['mite_customer_name'] }}
