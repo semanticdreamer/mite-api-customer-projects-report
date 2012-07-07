@@ -38,7 +38,7 @@ $app = new Slim(array(
 //app mode 'production'
 $app->configureMode('production', function () use ($app) {
     $app->config(array(
-        'log.enable' => true,
+        'log.enable' => false,
         'debug' => false
     ));
 });
@@ -46,7 +46,7 @@ $app->configureMode('production', function () use ($app) {
 //app mode 'development'
 $app->configureMode('development', function () use ($app) {
     $app->config(array(
-        'log.enable' => false,
+        'log.enable' => true,
         'debug' => true
     ));
 });
@@ -63,7 +63,14 @@ Slim_Route::setDefaultConditions(array(
 ));
 
 //authentication, require HTTP basic auth for all routes
-$app->add(new Middleware_Auth_HttpBasic($config['app']['slim_framework']['authentication']['username'], $config['app']['slim_framework']['authentication']['password']));
+// $app->add(new Middleware_Auth_HttpBasic($config['app']['slim_framework']['authentication']['username'], $config['app']['slim_framework']['authentication']['password']));
+require APPDIR.'lib/slim/Middleware/Auth/HttpBasicWithAuthorization.php';
+$authConfig = array_merge($config['accounts'], $config['admin_users']);
+$app->add(new Slim_Middleware_Auth_HttpBasicWithAuthorization($authConfig));
+
+//global variable 'auth_user'
+$twig = $app->view()->getEnvironment();
+$twig->addGlobal('auth_user', $app->request()->headers('PHP_AUTH_USER'));
 
 //routes using $app, $config, $api 
 require APPDIR.'routes/account.php';

@@ -9,6 +9,16 @@ app:
             username: "YOUR USERNAME"
             password: "YOUR PASSWORD"
 
+admin_users:
+    "ADMIN USERNAME":
+        password: "PASSWORD FOR ADMIN USER"
+        authorized_urls:
+            - "/(.*)"
+    "ANOTHER ADMIN USERNAME":
+        password: "PASSWORD FOR ANOTHER ADMIN USER"
+        authorized_urls:
+            - "/(.*)"
+
 mite:
     account: "YOUR MITE ACCOUNT"
     api_key: "YOUR MITE API KEY"
@@ -17,9 +27,18 @@ accounts:
     "YOUR_ACCOUNT_IDENTIFIER":
         mite_customer_name: "NAME OF YOUR MITE CUSTOMER"
         informal_salutation: "INFORMAL SALUTATION FOR YOUR CUSTOMER"
+        password: "PASSWORD FOR YOUR CUSTOMER"
+        authorized_urls:
+            - "/accounts/YOUR_ACCOUNT_IDENTIFIER/(.*)"
     "ANOTHER_ACCOUNT_IDENTIFIER":
         mite_customer_name: "NAME OF ANOTHER MITE CUSTOMER"
         informal_salutation: "INFORMAL SALUTATION FOR YOUR CUSTOMER"
+        password: "PASSWORD FOR YOUR CUSTOMER"
+        authorized_urls:
+            - "/accounts/ANOTHER_ACCOUNT_IDENTIFIER/(.*)"
     "YET_ANOTHER_ACCOUNT_IDENTIFIER":
         mite_customer_name: "NAME OF YET ANOTHER MITE CUSTOMER"
         informal_salutation: "INFORMAL SALUTATION FOR YOUR CUSTOMER"
+        password: "PASSWORD FOR YOUR CUSTOMER"
+        authorized_urls:
+            - "/accounts/YET_ANOTHER_ACCOUNT_IDENTIFIER/(.*)"
