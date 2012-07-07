@@ -1,3 +1,9 @@
+<div class="nav-collapse pull-right">
+  {% if auth_user is defined %}
+  <p class="navbar-text"><i class="icon-user icon-white"></i> {{ auth_user }}</p>
+  {% endif %}
+</div><!--/.nav-collapse -->
+
 <div class="nav-collapse">
   {% if brand is defined and accounts is defined %}
     <ul class="nav">
