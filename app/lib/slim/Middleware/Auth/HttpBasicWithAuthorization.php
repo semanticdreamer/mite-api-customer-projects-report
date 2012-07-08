@@ -86,9 +86,12 @@ class Slim_Middleware_Auth_HttpBasicWithAuthorization extends Slim_Middleware {
     /**
      * Call
      *
-     * This method will check the HTTP request headers for previous authentication. If
-     * the request has already authenticated, the next middleware is called. Otherwise,
-     * a 401 Authentication Required response is returned to the client.
+     * This method will check the HTTP request headers for previous authentication.
+     * If the request has already been authenticated and the request is authorized 
+     * the next middleware is called.
+     * 
+     * In case of no authentication, a 401 Unauthorized response is returned to the client.
+     * In case of no authorization, a 403 Forbidden response is returned to the client.
      *
      * @return void
      */
@@ -102,9 +105,10 @@ class Slim_Middleware_Auth_HttpBasicWithAuthorization extends Slim_Middleware {
           $res = $app->response();
           $authUser = $req->headers('PHP_AUTH_USER');
           $authPass = $req->headers('PHP_AUTH_PW');
-          //valid user/ pwd
           if ( $authUser && $authPass && array_key_exists($authUser, $config) && $authPass === $config[$authUser]['password'] ) {
-              //check authorized urls
+              //valid user and pwd
+              $authorized = false; //default
+              //is there a 'authorized_urls' config for auth user?
               $authorized_urls = isset($config[$authUser]['authorized_urls']) ? $config[$authUser]['authorized_urls'] : array();
               foreach ($authorized_urls as $surl) {
                   $patternAsRegex = $surl;
@@ -112,17 +116,24 @@ class Slim_Middleware_Auth_HttpBasicWithAuthorization extends Slim_Middleware {
                       $patternAsRegex = $patternAsRegex . '?';
                   }
                   $patternAsRegex = '@^' . $patternAsRegex . '$@';
-                  if (!preg_match($patternAsRegex, $req->getPathInfo())) {
-                      $app->halt(403, 'Not Authorized! You don\'t have permission to access resource \''.$req->getPathInfo().'\'. You shall not pass!');
+                  //check authorized urls...
+                  if (preg_match($patternAsRegex, $req->getPathInfo())) {
+                    $authorized = true;
                   }
               }
+              if (!$authorized) {
+                //not authorized (403)
+                $app->halt(403, 'Not Authorized! You don\'t have permission to access \''.$req->getPathInfo().'\'. You shall not pass!');
+              }
           } else {
+              //not authenticated (401)
               $res->status(401);
               $res->header('WWW-Authenticate', sprintf('Basic realm="%s"', $realm));
               $app->stop();
           }
         });
 
+        //authenticated and authorized
         $this->next->call();
     }
 }
