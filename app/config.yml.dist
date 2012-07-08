@@ -2,6 +2,7 @@
 # You must enable the mite.api for your user within the webinterface of mite! It is disabled by default.
 app:
     title: "YOUR SITE TITLE"
+    brand: "YOUR BRAND"
     slim_framework:
         settings:
             mode: "production"

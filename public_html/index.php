@@ -71,6 +71,8 @@ $app->add(new Slim_Middleware_Auth_HttpBasicWithAuthorization($authConfig));
 //global variable 'auth_user'
 $twig = $app->view()->getEnvironment();
 $twig->addGlobal('auth_user', $app->request()->headers('PHP_AUTH_USER'));
+$twig->addGlobal('title', $config['app']['title']);
+$twig->addGlobal('brand', $config['app']['brand']);
 
 //routes using $app, $config, $api 
 require APPDIR.'routes/account.php';

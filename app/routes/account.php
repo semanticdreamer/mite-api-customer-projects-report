@@ -3,7 +3,7 @@
 $app->get('/accounts/', function () use ($app, $config, $api) {
 	$projects = json_decode($api->sendGetRequest('/projects.json'), true);
 	$data = array(
-		'brand' => $config['app']['title'],
+		'title_postfix' => 'Accounts',
 		'accounts' => $config['accounts']);
 	$app->render('accounts.twig', $data);
 })->name('accounts');
@@ -17,7 +17,7 @@ $app->get('/accounts/:accountid/', function ($accountid) use ($app, $config, $ap
 	$projectsForAccount = Mite_Api::getResourcesByKeyValue('project', 
 		'customer_name', $miteCustomerName, $projects);
 	$data = array(
-		'brand' => $config['app']['title'],
+		'title_postfix' => 'Account ' . $miteCustomerName,
 		'account_name' => $miteCustomerName,
 		'account_salutation' => $informalSalutation,
 		'account' => $customer,
