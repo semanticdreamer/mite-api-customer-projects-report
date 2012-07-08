@@ -123,12 +123,22 @@ class Slim_Middleware_Auth_HttpBasicWithAuthorization extends Slim_Middleware {
               }
               if (!$authorized) {
                 //not authorized (403)
-                $app->halt(403, 'Forbidden! You don\'t have permission to access \''.$req->getPathInfo().'\'.');
+                $app->halt(
+                  403, 
+                  'Forbidden! You don\'t have permission to access \''
+                  .$req->getPathInfo()
+                  .'\'.'
+                  );
               }
           } else {
               //not authenticated (401)
               $res->header('WWW-Authenticate', sprintf('Basic realm="%s"', $realm));
-              $app->halt(401, 'Access denied! The request for \''.$req->getPathInfo().'\' requires valid user authentication.');
+              $app->halt(
+                401,
+                'Access denied! The request for \''
+                .$req->getPathInfo()
+                .'\' requires valid user authentication.'
+                );
           }
         });
 

@@ -68,20 +68,27 @@ require APPDIR.'lib/slim/Middleware/Auth/HttpBasicWithAuthorization.php';
 $authConfig = array_merge($config['accounts'], $config['admin_users']);
 $app->add(new Slim_Middleware_Auth_HttpBasicWithAuthorization($authConfig));
 
-//global variable 'auth_user'
-$twig = $app->view()->getEnvironment();
-$twig->addGlobal('auth_user', $app->request()->headers('PHP_AUTH_USER'));
-$twig->addGlobal('title', $config['app']['title']);
-$twig->addGlobal('brand', $config['app']['brand']);
-
 //routes using $app, $config, $api 
 require APPDIR.'routes/account.php';
 require APPDIR.'routes/account_project.php';
 
 //GET route for '/' (index)
-$app->get('/', function () use ($app) {
-    $app->redirect('/accounts/');
+$app->get('/', function () use ($app, $config) {
+    //redirect by auth user
+    $authUser = $app->request()->headers('PHP_AUTH_USER');
+    if (array_key_exists($authUser, $config['admin_users'])) {
+      $app->redirect('/accounts/');
+    } elseif (array_key_exists($authUser, $config['accounts'])) {
+      $app->redirect('/accounts/'.$authUser.'/');
+    }
 })->name('index');
+
+//global variable 'auth_user'
+$twig = $app->view()->getEnvironment();
+$twig->addGlobal('auth_user', $app->request()->headers('PHP_AUTH_USER'));
+$twig->addGlobal('title', $config['app']['title']);
+$twig->addGlobal('brand', $config['app']['brand']);
+$twig->addGlobal('brand_url', $app->urlFor('index'));
 
 $app->run();
 ?>
