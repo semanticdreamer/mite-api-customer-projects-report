@@ -63,7 +63,6 @@ Slim_Route::setDefaultConditions(array(
 ));
 
 //authentication, require HTTP basic auth for all routes
-// $app->add(new Middleware_Auth_HttpBasic($config['slim_framework']['authentication']['username'], $config['slim_framework']['authentication']['password']));
 require APPDIR.'lib/slim/Middleware/Auth/HttpBasicWithAuthorization.php';
 $authConfig = array_merge($config['accounts'], $config['slim_framework']['authentication']['admin_users'], $config['slim_framework']['authorization']);
 $app->add(new Slim_Middleware_Auth_HttpBasicWithAuthorization($authConfig));
