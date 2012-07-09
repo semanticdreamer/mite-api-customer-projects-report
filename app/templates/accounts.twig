@@ -32,9 +32,10 @@
       <tr>
         <th class="actions">&nbsp;</th>
         <th><i class="icon-briefcase"></i>&nbsp;Account Name (mite. Customer)</th>
+        <th><i class="icon-bullhorn"></i>&nbsp;Informal Salutation</th>
         <th><i class="icon-user"></i>&nbsp;Username</th>
         <th><i class="icon-lock"></i>&nbsp;Password</th>
-        <th><i class="icon-bullhorn"></i>&nbsp;Informal Salutation</th>
+        <th><i class="icon-bookmark"></i>&nbsp;Direct Link</th>
       </tr>
     </thead>
     <tbody>
@@ -47,13 +48,16 @@
             {{ account['mite_customer_name'] }}
           </td>
           <td>
+            {{ account['informal_salutation'] }}
+          </td>
+          <td>
             {{ accountid }}
           </td>
           <td>
             {{ account['password'] }}
           </td>
           <td>
-            {{ account['informal_salutation'] }}
+            <a href="{{ urlFor('account', {"accountid": accountid }) }}">{{ urlFor('account', {"accountid": accountid }) }}</a>
           </td>
         </tr>
       {% endfor %}
