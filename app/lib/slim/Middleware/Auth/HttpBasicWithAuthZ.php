@@ -123,15 +123,14 @@ class Slim_Middleware_Auth_HttpBasicWithAuthZ extends Slim_Middleware {
           $public_access = Slim_Middleware_Auth_HttpBasicWithAuthZ::isPathInfoInUrls($req->getPathInfo(), $public_urls);
           if ( $public_access ) { 
             //public access
-          }
-          elseif ( $authUser && $authPass && array_key_exists($authUser, $config) && $authPass === $config[$authUser]['password'] ) {
+          } elseif ( $authUser && $authPass && array_key_exists($authUser, $config) && $authPass === $config[$authUser]['password'] ) {
               //valid user and pwd
               //request for authorized url?
               $authorized_urls = isset($config[$authUser]['authorized_urls']) ? $config[$authUser]['authorized_urls'] : array();
-              array_push($authorized_urls, $loggedin_url.'(.*)'); //add loggedin url
+              array_push($authorized_urls, $loggedin_url.$authUser.'/'); //add loggedin url
               $authorized = Slim_Middleware_Auth_HttpBasicWithAuthZ::isPathInfoInUrls($req->getPathInfo(), $authorized_urls);
               
-              if (!$authorized && $req->getPathInfo() === $login_url ) {
+              if ($req->getPathInfo() === $login_url ) {
                 //not authorized, but request for login url
                 //redirect to login success route 'loggedin'
                 $app->redirect($loggedin_url.$authUser.'/');

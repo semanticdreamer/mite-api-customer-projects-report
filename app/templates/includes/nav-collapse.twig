@@ -1,15 +1,16 @@
 <div class="nav-collapse pull-right">
   {% if auth_user is defined and auth_user is not empty %}
-  <p class="navbar-text"><i class="icon-user icon-white"></i> {{ auth_user }}</p>
-  <!-- <div class="btn-group">
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-      <i class="icon-user"></i> {{ auth_user }}
+  <!-- <p class="navbar-text"><i class="icon-user icon-white"></i> {{ auth_user }}</p> -->
+  <div class="btn-group">
+    <button class="btn"><i class="icon-user"></i>&nbsp;{{ auth_user }}</button>
+    <button class="btn dropdown-toggle" data-toggle="dropdown">
       <span class="caret"></span>
-    </a>
+    </button>
     <ul class="dropdown-menu">
-      <li><a href="{{ urlFor('index') }}">Change User</a></li>
+      <li><i class="icon-info-sign"></i>&nbsp;<strong>Logout</strong></li>
+      <li>Please close browser.</li>
     </ul>
-  </div> -->
+  </div>
   {% else %}
   <a href="{{ urlFor('login') }}" class="btn"><i class="icon-user"></i>&nbsp;Login</a>
   {% endif %}

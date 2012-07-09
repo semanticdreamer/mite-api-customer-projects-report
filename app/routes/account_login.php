@@ -9,7 +9,7 @@ $app->get('/accounts/loggedin/:authuser/', function ($authuser) use ($app, $conf
 	$reqAuthUser = $app->request()->headers('PHP_AUTH_USER');
 	if (!isset($authuser) || $authuser !== $reqAuthUser) {
 		$app->redirect($app->urlFor('index'));
-	} elseif (array_keys($config['slim_framework']['authentication']['admin_users'], $reqAuthUser)) {
+	} elseif (array_key_exists($reqAuthUser, $config['slim_framework']['authentication']['admin_users'])) {
 		//redirect admin user to account list
 		$app->redirect($app->urlFor('accounts'));
 	} else {
