@@ -1,28 +1,30 @@
 # mite. API Authentication
 # You must enable the mite.api for your user within the webinterface of mite! It is disabled by default.
-app:
-    title: "YOUR SITE TITLE"
-    brand: "YOUR BRAND"
-    slim_framework:
-        settings:
-            mode: "production"
-        authentication:
-            username: "YOUR USERNAME"
-            password: "YOUR PASSWORD"
 
-admin_users:
-    "ADMIN USERNAME":
-        password: "PASSWORD FOR ADMIN USER"
-        authorized_urls:
-            - "/(.*)"
-    "ANOTHER ADMIN USERNAME":
-        password: "PASSWORD FOR ANOTHER ADMIN USER"
-        authorized_urls:
-            - "/(.*)"
+title: "YOUR SITE TITLE"
+brand: "YOUR BRAND"
+support_email: "your.name@example.com"
 
 mite:
     account: "YOUR MITE ACCOUNT"
     api_key: "YOUR MITE API KEY"
+
+slim_framework:
+    settings:
+        mode: "production"
+    authentication:
+        admin_users:
+            "ADMIN_USERNAME":
+                password: "PASSWORD FOR ADMIN USER"
+                authorized_urls:
+                    - "/(.*)"
+            "ANOTHER_ADMIN_USERNAME":
+                password: "PASSWORD FOR ANOTHER ADMIN USER"
+                authorized_urls:
+                    - "/(.*)"
+    authorization:
+        public_urls:
+            - "/"
 
 accounts:
     "YOUR_ACCOUNT_IDENTIFIER":

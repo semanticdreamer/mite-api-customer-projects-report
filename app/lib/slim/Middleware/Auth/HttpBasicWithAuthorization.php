@@ -27,15 +27,18 @@
  *                   '/accounts/username1/(.*)',
  *                   '/about/.+'
  *              )
- *           ),
+ *          ),
  *          'username2' => array(
  *              'password' =>'password2',
  *              'authorized_urls' => array(
  *                   '/accounts/username2/(.*)',
  *                   '/about/.+'
  *              )
+ *          ),
+ *          'public_urls' => array(
+ *                '/'
  *           )
- *      ),
+ *      ),   
  *     'Protected Area'
  * ));
  *
@@ -105,22 +108,20 @@ class Slim_Middleware_Auth_HttpBasicWithAuthorization extends Slim_Middleware {
           $res = $app->response();
           $authUser = $req->headers('PHP_AUTH_USER');
           $authPass = $req->headers('PHP_AUTH_PW');
-          if ( $authUser && $authPass && array_key_exists($authUser, $config) && $authPass === $config[$authUser]['password'] ) {
+
+          $public_access = false; //default
+          //request for public url?
+          $public_urls = isset($config['public_urls']) ? $config['public_urls'] : array();
+          $public_access = Slim_Middleware_Auth_HttpBasicWithAuthorization::isPathInfoInUrls($req->getPathInfo(), $public_urls);
+          if ( $public_access ) { 
+            //public access
+          }
+          elseif ( $authUser && $authPass && array_key_exists($authUser, $config) && $authPass === $config[$authUser]['password'] ) {
               //valid user and pwd
               $authorized = false; //default
-              //is there a 'authorized_urls' config for auth user?
+              //request for authorized url?
               $authorized_urls = isset($config[$authUser]['authorized_urls']) ? $config[$authUser]['authorized_urls'] : array();
-              foreach ($authorized_urls as $surl) {
-                  $patternAsRegex = $surl;
-                  if (substr($surl, -1) === '/') {
-                      $patternAsRegex = $patternAsRegex . '?';
-                  }
-                  $patternAsRegex = '@^' . $patternAsRegex . '$@';
-                  //check authorized urls...
-                  if (preg_match($patternAsRegex, $req->getPathInfo())) {
-                    $authorized = true;
-                  }
-              }
+              $authorized = Slim_Middleware_Auth_HttpBasicWithAuthorization::isPathInfoInUrls($req->getPathInfo(), $authorized_urls);
               if (!$authorized) {
                 //not authorized (403)
                 $app->halt(
@@ -144,5 +145,18 @@ class Slim_Middleware_Auth_HttpBasicWithAuthorization extends Slim_Middleware {
 
         //authenticated and authorized
         $this->next->call();
+    }
+
+    public static function isPathInfoInUrls($pathInfo, $urls = array()) {
+      foreach ($urls as $surl) {
+          $patternAsRegex = $surl;
+          if (substr($surl, -1) === '/') {
+              $patternAsRegex = $patternAsRegex . '?';
+          }
+          $patternAsRegex = '@^' . $patternAsRegex . '$@';
+          if (preg_match($patternAsRegex, $pathInfo)) {
+            return true;
+          }
+      }
     }
 }

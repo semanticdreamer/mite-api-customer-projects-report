@@ -27,7 +27,7 @@ require APPDIR.'vendor/slim/slim/Slim/Slim.php';
 $twigView = new View_Twig();
 $twigView->twigDirectory = APPDIR.'vendor/twig/lib/twig';
 $twigView->twigExtensions = array(new Twig_Extension_Debug(), new Twig_Extensions_Slim());
-$twigView->twigOptions = array('mode' => $config['app']['slim_framework']['settings']['mode']);
+$twigView->twigOptions = array('mode' => $config['slim_framework']['settings']['mode']);
 
 //app, with custom settings
 $app = new Slim(array(
@@ -63,9 +63,9 @@ Slim_Route::setDefaultConditions(array(
 ));
 
 //authentication, require HTTP basic auth for all routes
-// $app->add(new Middleware_Auth_HttpBasic($config['app']['slim_framework']['authentication']['username'], $config['app']['slim_framework']['authentication']['password']));
+// $app->add(new Middleware_Auth_HttpBasic($config['slim_framework']['authentication']['username'], $config['slim_framework']['authentication']['password']));
 require APPDIR.'lib/slim/Middleware/Auth/HttpBasicWithAuthorization.php';
-$authConfig = array_merge($config['accounts'], $config['admin_users']);
+$authConfig = array_merge($config['accounts'], $config['slim_framework']['authentication']['admin_users'], $config['slim_framework']['authorization']);
 $app->add(new Slim_Middleware_Auth_HttpBasicWithAuthorization($authConfig));
 
 //routes using $app, $config, $api 
@@ -74,20 +74,15 @@ require APPDIR.'routes/account_project.php';
 
 //GET route for '/' (index)
 $app->get('/', function () use ($app, $config) {
-    //redirect by auth user
-    $authUser = $app->request()->headers('PHP_AUTH_USER');
-    if (array_key_exists($authUser, $config['admin_users'])) {
-      $app->redirect('/accounts/');
-    } elseif (array_key_exists($authUser, $config['accounts'])) {
-      $app->redirect('/accounts/'.$authUser.'/');
-    }
+	$app->render('index.twig');
 })->name('index');
 
 //global variable 'auth_user'
 $twig = $app->view()->getEnvironment();
 $twig->addGlobal('auth_user', $app->request()->headers('PHP_AUTH_USER'));
-$twig->addGlobal('title', $config['app']['title']);
-$twig->addGlobal('brand', $config['app']['brand']);
+$twig->addGlobal('title', $config['title']);
+$twig->addGlobal('brand', $config['brand']);
+$twig->addGlobal('support_email', $config['support_email']);
 $twig->addGlobal('brand_url', $app->urlFor('index'));
 
 $app->run();

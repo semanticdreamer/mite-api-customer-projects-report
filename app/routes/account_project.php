@@ -9,7 +9,7 @@ $app->get('/accounts/:accountid/projects/', function ($accountid) use ($app, $co
 		'customer_name', $miteCustomerName, $projects);
 	$data = array(
 		'title_postfix' => 'Projects ' . $miteCustomerName,
-		'brand_url' => array_key_exists($authUser, $config['admin_users']) ? $app->urlFor('accounts') : $app->urlFor('account', array('accountid' => $accountid)),
+		'brand_url' => array_key_exists($authUser, $config['slim_framework']['authentication']['admin_users']) ? $app->urlFor('accounts') : $app->urlFor('account', array('accountid' => $accountid)),
 		'account_name' => $miteCustomerName,
 		'account_id' => $accountid,
 		'projects' => $projectsForAccount);
@@ -27,7 +27,7 @@ $app->get('/accounts/:accountid/projects/:projectid/', function ($accountid, $pr
 	$time_entries = json_decode($api->sendGetRequest('/time_entries.json?project_id='.$projectid), true);
 	$data = array(
 		'title_postfix' => 'Project ' . $project['project']['name'],
-		'brand_url' => array_key_exists($authUser, $config['admin_users']) ? $app->urlFor('accounts') : $app->urlFor('account', array('accountid' => $accountid)),
+		'brand_url' => array_key_exists($authUser, $config['slim_framework']['authentication']['admin_users']) ? $app->urlFor('accounts') : $app->urlFor('account', array('accountid' => $accountid)),
 		'project' => $project,
 		'projects' => $projectsForAccount,
 		'account_name' => $miteCustomerName,

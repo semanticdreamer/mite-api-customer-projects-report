@@ -20,7 +20,7 @@ $app->get('/accounts/:accountid/', function ($accountid) use ($app, $config, $ap
 		'customer_name', $miteCustomerName, $projects);
 	$data = array(
 		'title_postfix' => 'Account ' . $miteCustomerName,
-		'brand_url' => array_key_exists($authUser, $config['admin_users']) ? $app->urlFor('accounts') : $app->urlFor('account', array('accountid' => $accountid)),
+		'brand_url' => array_key_exists($authUser, $config['slim_framework']['authentication']['admin_users']) ? $app->urlFor('accounts') : $app->urlFor('account', array('accountid' => $accountid)),
 		'account_name' => $miteCustomerName,
 		'account_salutation' => $informalSalutation,
 		'account' => $customer,

@@ -1,0 +1,20 @@
+{% include 'includes/header.twig' %}
+
+<div class="container">
+  
+  <!-- Main hero unit for a primary marketing message or call to action -->
+  <div class="hero-unit">
+    <h1>Hello!</h1>
+    <blockquote class="pull-right">
+      <p>A lot of work has already been done.</p>
+      <small>{{ brand }}</small>
+    </blockquote>
+    <p>&nbsp;</p>
+    <p>Please get in <a class="btn btn-primary btn-mini" href="mailto:{{ support_email }}"><i class="icon-envelope icon-white"></i>&nbsp;Contact</a></p>
+  </div>
+
+  {% include 'includes/copyright.twig' %}
+
+</div> <!-- /container -->
+
+{% include 'includes/footer.twig' %}
