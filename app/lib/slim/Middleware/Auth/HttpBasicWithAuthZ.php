@@ -37,7 +37,9 @@
  *          ),
  *          'public_urls' => array(
  *                '/'
- *           )
+ *           ),
+ *          'login_url' => '/login/'
+ *          'loggedin_url' => '/loggedin/'
  *      ),   
  *     'Protected Area'
  * ));
@@ -106,23 +108,35 @@ class Slim_Middleware_Auth_HttpBasicWithAuthZ extends Slim_Middleware {
         $this->app->hook('slim.before.router', function () use ($app, $config, $realm) {
           $req = $app->request();
           $res = $app->response();
+
           $authUser = $req->headers('PHP_AUTH_USER');
           $authPass = $req->headers('PHP_AUTH_PW');
 
+          $login_url = isset($config['login_url']) ? $config['login_url'] : '/login/';
+          $loggedin_url = isset($config['loggedin_url']) ? $config['loggedin_url'] : '/loggedin/';
+
           $public_access = false; //default
-          //request for public url?
+          $authorized = false; //default
+
           $public_urls = isset($config['public_urls']) ? $config['public_urls'] : array();
+          //request for public url?
           $public_access = Slim_Middleware_Auth_HttpBasicWithAuthZ::isPathInfoInUrls($req->getPathInfo(), $public_urls);
           if ( $public_access ) { 
             //public access
           }
           elseif ( $authUser && $authPass && array_key_exists($authUser, $config) && $authPass === $config[$authUser]['password'] ) {
               //valid user and pwd
-              $authorized = false; //default
               //request for authorized url?
               $authorized_urls = isset($config[$authUser]['authorized_urls']) ? $config[$authUser]['authorized_urls'] : array();
+              array_push($authorized_urls, $loggedin_url.'(.*)'); //add loggedin url
               $authorized = Slim_Middleware_Auth_HttpBasicWithAuthZ::isPathInfoInUrls($req->getPathInfo(), $authorized_urls);
-              if (!$authorized) {
+              
+              if (!$authorized && $req->getPathInfo() === $login_url ) {
+                //not authorized, but request for login url
+                //redirect to login success route 'loggedin'
+                $app->redirect($loggedin_url.$authUser.'/');
+              }
+              elseif (!$authorized) {
                 //not authorized (403)
                 $app->halt(
                   403, 

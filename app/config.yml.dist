@@ -25,6 +25,8 @@ slim_framework:
     authorization:
         public_urls:
             - "/"
+        login_url: "/login/"
+        loggedin_url: "/loggedin/"
 
 accounts:
     "YOUR_ACCOUNT_IDENTIFIER":

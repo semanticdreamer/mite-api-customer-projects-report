@@ -67,14 +67,11 @@ require APPDIR.'lib/slim/Middleware/Auth/HttpBasicWithAuthZ.php';
 $authConfig = array_merge($config['accounts'], $config['slim_framework']['authentication']['admin_users'], $config['slim_framework']['authorization']);
 $app->add(new Slim_Middleware_Auth_HttpBasicWithAuthZ($authConfig));
 
-//routes using $app, $config, $api 
+//routes using $app, $config, $api
 require APPDIR.'routes/account.php';
 require APPDIR.'routes/account_project.php';
-
-//GET route for '/' (index)
-$app->get('/', function () use ($app, $config) {
-	$app->render('index.twig');
-})->name('index');
+require APPDIR.'routes/account_login.php';
+require APPDIR.'routes/index.php';
 
 //global variable 'auth_user'
 $twig = $app->view()->getEnvironment();
