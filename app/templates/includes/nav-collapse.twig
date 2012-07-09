@@ -1,5 +1,5 @@
 <div class="nav-collapse pull-right">
-  {% if auth_user is defined %}
+  {% if auth_user is defined and auth_user is not empty %}
   <p class="navbar-text"><i class="icon-user icon-white"></i> {{ auth_user }}</p>
   {% endif %}
 </div><!--/.nav-collapse -->
