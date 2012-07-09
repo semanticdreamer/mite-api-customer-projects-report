@@ -19,7 +19,7 @@
  * USAGE
  *
  * $app = new Slim();
- * $app->add(new Slim_Middleware_Auth_HttpBasicWithAuthorization(
+ * $app->add(new Slim_Middleware_Auth_HttpBasicWithAuthZ(
  *      array(
  *          'username1' => array(
  *              'password' =>'password1',
@@ -63,7 +63,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-class Slim_Middleware_Auth_HttpBasicWithAuthorization extends Slim_Middleware {
+class Slim_Middleware_Auth_HttpBasicWithAuthZ extends Slim_Middleware {
     /**
      * @var string
      */
@@ -112,7 +112,7 @@ class Slim_Middleware_Auth_HttpBasicWithAuthorization extends Slim_Middleware {
           $public_access = false; //default
           //request for public url?
           $public_urls = isset($config['public_urls']) ? $config['public_urls'] : array();
-          $public_access = Slim_Middleware_Auth_HttpBasicWithAuthorization::isPathInfoInUrls($req->getPathInfo(), $public_urls);
+          $public_access = Slim_Middleware_Auth_HttpBasicWithAuthZ::isPathInfoInUrls($req->getPathInfo(), $public_urls);
           if ( $public_access ) { 
             //public access
           }
@@ -121,7 +121,7 @@ class Slim_Middleware_Auth_HttpBasicWithAuthorization extends Slim_Middleware {
               $authorized = false; //default
               //request for authorized url?
               $authorized_urls = isset($config[$authUser]['authorized_urls']) ? $config[$authUser]['authorized_urls'] : array();
-              $authorized = Slim_Middleware_Auth_HttpBasicWithAuthorization::isPathInfoInUrls($req->getPathInfo(), $authorized_urls);
+              $authorized = Slim_Middleware_Auth_HttpBasicWithAuthZ::isPathInfoInUrls($req->getPathInfo(), $authorized_urls);
               if (!$authorized) {
                 //not authorized (403)
                 $app->halt(
