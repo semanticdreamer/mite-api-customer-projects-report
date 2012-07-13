@@ -19,6 +19,8 @@
   </div>
   
   <h2>Time entries</h2>
+
+    <p class="pull-right"><span class="label label-info">Tip!</span> Scroll down for Total Minutes/ Amount and <a href="#total_by_billing_status">Total by Billing Status</a>.</p>
   
   <table class="table table-condensed">
     <thead>
@@ -33,7 +35,17 @@
       </tr>
     </thead>
     <tbody>
+      {% set total_amount = 0 %}
+      {% set total_minutes = 0 %}
+      {% set amount_bill_pending = 0 %}
+      {% set amount_already_invoiced = 0 %}
+      {% set amount_not_billable = 0 %}
+      {% set minutes_bill_pending = 0 %}
+      {% set minutes_already_invoiced = 0 %}
+      {% set minutes_not_billable = 0 %}
       {% for time_entry in time_entries %}
+        {% set total_amount = total_amount + time_entry.time_entry.revenue %}
+        {% set total_minutes = total_minutes + time_entry.time_entry.minutes %}
         <tr>
           <td>{{ time_entry.time_entry.date_at|date("d.m.Y", "Europe/Paris") }}</td>
           <td>{{ time_entry.time_entry.service_name|escape }}</td>
@@ -44,20 +56,46 @@
           <td>
             {% if time_entry.time_entry.billable %}
               {% if time_entry.time_entry.locked %}
+                {% set amount_already_invoiced = amount_already_invoiced + time_entry.time_entry.revenue %}
+                {% set minutes_already_invoiced = minutes_already_invoiced + time_entry.time_entry.minutes %}
                 <span class="label label-success">already invoiced</span>
               {% endif %}
               {% if not time_entry.time_entry.locked %}
+                {% set amount_bill_pending = amount_bill_pending + time_entry.time_entry.revenue %}
+                {% set minutes_bill_pending = minutes_bill_pending + time_entry.time_entry.minutes %}
                 <span class="label label-warning">bill pending</span>
               {% endif %}
             {% endif %}
             {% if not time_entry.time_entry.billable %}
+              {% set amount_not_billable = amount_not_billable + time_entry.time_entry.revenue %}
+              {% set minutes_not_billable = minutes_not_billable + time_entry.time_entry.minutes %}
               <span class="label">not billable</span>
             {% endif %}
           </td>
         </tr>
       {% endfor %}
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><strong class="pull-right">Total</strong></td>
+          <td><strong>{{ total_minutes}}</strong></td>
+          <td><strong>{{ (total_amount / 100)|number_format(2, ',', '.') }}&nbsp;&euro;</strong></td>
+          <td>&nbsp;</td>
+        </tr>
     </tbody>
   </table>
+
+  <h2 id="total_by_billing_status">Total by Billing Status</h2>
+
+  <dl class="dl-horizontal">
+    <dt><span class="label label-success">already invoiced</span></dt>
+    <dd>{{ (amount_already_invoiced / 100)|number_format(2, ',', '.') }} &euro; ({{ minutes_already_invoiced }} minutes)</dd>
+    <dt><span class="label label-warning">bill pending</span></dt>
+    <dd>{{ (amount_bill_pending / 100)|number_format(2, ',', '.') }} &euro; ({{ minutes_bill_pending }} minutes)</dd>
+    <dt><span class="label label">not billable</span></dt>
+    <dd>{{ (amount_not_billable / 100)|number_format(2, ',', '.') }} &euro; ({{ minutes_not_billable }} minutes)</dd>
+  </dl>
 
   {% include 'includes/copyright.twig' %}
 
