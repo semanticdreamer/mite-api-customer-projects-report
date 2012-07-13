@@ -29,7 +29,7 @@
         <th class="nowrap"><i class="icon-comment"></i>&nbsp;Comment</th>
         <th class="nowrap"><i class="icon-time"></i>&nbsp;Minutes</th>
         <th class="nowrap">&euro;&nbsp;Amount</th>
-        <th class="nowrap"><i class="icon-check"></i>&nbsp;Billable?</th>
+        <th class="nowrap"><i class="icon-shopping-cart"></i>&nbsp;Billing Status</th>
       </tr>
     </thead>
     <tbody>
@@ -43,10 +43,15 @@
           <td>{{ (time_entry.time_entry.revenue / 100)|number_format(2, ',', '.') }} &euro;</td>
           <td>
             {% if time_entry.time_entry.billable %}
-              <span class="label label-info">yes</span>
+              {% if time_entry.time_entry.locked %}
+                <span class="label label-success">already invoiced</span>
+              {% endif %}
+              {% if not time_entry.time_entry.locked %}
+                <span class="label label-warning">bill pending</span>
+              {% endif %}
             {% endif %}
             {% if not time_entry.time_entry.billable %}
-              <span class="label">no</span>
+              <span class="label">not billable</span>
             {% endif %}
           </td>
         </tr>
